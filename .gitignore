@@ -1,8 +1,9 @@
+package-lock.json
 node_modules
-build
+dist
 *.bak
 *.log
-app/aot
+src/aot
 www/bundle.*
 www/*.js
 www/materialize

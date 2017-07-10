@@ -2,16 +2,13 @@
 
 import nodeResolve from 'rollup-plugin-node-resolve-angular';
 import commonjs from 'rollup-plugin-commonjs';
-import buble from 'rollup-plugin-buble';
-import uglify from 'rollup-plugin-uglify';
-import sourcemaps from 'rollup-plugin-sourcemaps';
+import postcss from 'rollup-plugin-postcss';
 
 // Beware of:
 // https://github.com/maxdavidson/rollup-plugin-sourcemaps/issues/33
 
 export default {
-  entry: 'build/aot-main.js', // entry point for the application
-  dest: 'www/bundle.js',
+  dest: 'www/bundle.rollup.dev.js',
   sourceMap: true,
   useStrict: false,
   format: 'iife', // ready-to-execute form, to put on a page
@@ -21,7 +18,6 @@ export default {
     console.warn(warning.message);
   },
   plugins: [
-    sourcemaps(),
     nodeResolve({
       es2015: true,  // Use new Angular es2015.
       module: false, // skip the ES5-in-ES2015 modules we aren't using.
@@ -34,8 +30,6 @@ export default {
         'node_modules/zone.js/**',
         'node_modules/rxjs/**'
       ]
-    }),
-    buble({ transforms: { dangerousForOf: true } }),
-    uglify()
+    })
   ]
 }
