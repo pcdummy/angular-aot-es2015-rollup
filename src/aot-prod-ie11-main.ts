@@ -1,3 +1,4 @@
+import './polyfills-ie11';
 import './polyfills';
 import './styles';
 

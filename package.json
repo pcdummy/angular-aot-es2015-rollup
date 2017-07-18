@@ -5,16 +5,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "live-server www",
     "explore": "source-map-explorer www/bundle.js",
     "ngc:prod": "ngc -p tsconfig.prod.json",
     "ngc:dev": "ngc -p tsconfig.json",
     "rollup:prod": "rollup -c rollup.config.prod.js",
     "rollup:dev": "rollup -c rollup.config.dev.js",
+    "rollup:ie11": "rollup -c rollup.config.prod-ie11.js",
     "copy": "copyfiles -u 1 src/**/*.css src/**/*.html dist/",
     "copy:materialize": "copyfiles -u 3 node_modules/materialize-css/dist/**/*.* www/materialize",
     "prod": "npm run ngc:prod && npm run copy && npm run copy:materialize && npm run rollup:prod",
-    "dev": "npm run ngc:dev && npm run copy && npm run copy:materialize && npm run rollup:dev"
+    "dev": "npm run ngc:dev && npm run copy && npm run copy:materialize && npm run rollup:dev",
+    "ie11": "npm run ngc:prod && npm run copy && npm run copy:materialize && npm run rollup:ie11",
+    "gzip": "gzip -f9k www/bundle-ie11.min.js && gzip -f9k www/bundle.min.js",
+    "build": "npm run dev && npm run prod && npm run ie11 && npm run gzip"
   },
   "author": "René Jochum <public@pc-dummy.net>",
   "license": "MIT",
@@ -31,6 +36,7 @@
     "core-js": "2.4.1",
     "materialize-css": "^0.99.0",
     "rxjs": "5.4.2",
+    "ts-helpers": "^1.1.2",
     "zone.js": "0.8.12"
   },
   "devDependencies": {
